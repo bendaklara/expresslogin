@@ -40,8 +40,7 @@ passport.use(new FacebookStrategy({
     clientID: config.facebook_api_key,
     clientSecret:config.facebook_api_secret ,
     callbackURL: config.callback_url,
-	graphApiVersion: 'v3.1',
-	profileFields: ['id', 'displayName', 'emails', 'profileUrl']
+	graphApiVersion: 'v3.1'
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -54,10 +53,7 @@ passport.use(new FacebookStrategy({
           {
             console.log("There is no such user, adding now");
 			console.log("Profile id: " + profile.id );
-			console.log("Profile email: " + profile.email );
-			console.log("displayName: " + profile.displayName );
-			
-			
+			console.log("Profile email: " + profile.emails );
             connection.query("INSERT into user_info(user_id) VALUES('" + String(profile.id) + "')");
           }
           else
