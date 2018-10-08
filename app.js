@@ -41,7 +41,7 @@ passport.use(new FacebookStrategy({
     clientSecret:config.facebook_api_secret ,
     callbackURL: config.callback_url,
 	graphApiVersion: 'v3.1',
-	profileFields: ['id', 'displayName', 'username', 'emails', 'profileUrl']
+	profileFields: ['id', 'displayName', 'emails', 'profileUrl']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -56,7 +56,6 @@ passport.use(new FacebookStrategy({
 			console.log("Profile id: " + profile.id );
 			console.log("Profile email: " + profile.email );
 			console.log("displayName: " + profile.displayName );
-			console.log("username: " + profile.username );
 			
 			
             connection.query("INSERT into user_info(user_id) VALUES('" + String(profile.id) + "')");
