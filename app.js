@@ -89,7 +89,7 @@ app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook',{scope: ['username', 'first_name', 'last_name', 'middle_name', 'gender', 'link'] }));
+app.get('/auth/facebook', passport.authenticate('facebook',{scope: ['first_name', 'last_name', 'middle_name', 'gender', 'link'] }));
 
 
 app.get('/auth/facebook/callback',
