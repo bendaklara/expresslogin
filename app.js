@@ -51,7 +51,8 @@ passport.use(new FacebookStrategy({
         if(rows.length===0)
           {
             console.log("There is no such user, adding now");
-            connection.query("INSERT into user_info(user_id,user_name) VALUES('"+profile.id+"','"+profile.username+"')");
+			console.log("Profile id: " + profile.id + "   Profile username" + profile.username);
+            connection.query("INSERT into user_info(user_id,user_name) VALUES('"+ profile.id + "','" + profile.username + "')");
           }
           else
             {
