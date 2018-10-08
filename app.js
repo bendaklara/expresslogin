@@ -40,6 +40,7 @@ passport.use(new FacebookStrategy({
     clientID: config.facebook_api_key,
     clientSecret:config.facebook_api_secret ,
     callbackURL: config.callback_url,
+	graphApiVersion: 'v3.1',
 	profileFields: ['id', 'displayName', 'email']
   },
   function(accessToken, refreshToken, profile, done) {
