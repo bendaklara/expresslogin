@@ -102,4 +102,6 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/login')
 }
 
-app.listen(3000);
+app.listen(5006, () => {
+  console.log('Server is up on port 5006');
+});
