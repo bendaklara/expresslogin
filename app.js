@@ -39,7 +39,8 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
     clientID: config.facebook_api_key,
     clientSecret:config.facebook_api_secret ,
-    callbackURL: config.callback_url
+    callbackURL: config.callback_url,
+	profileFields: ['id', 'email', 'first_name', 'last_name', 'displayName', 'middle_name', 'gender', 'link']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -89,7 +90,7 @@ app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook',{scope: ['first_name', 'last_name', 'middle_name', 'gender', 'link'] }));
+app.get('/auth/facebook', passport.authenticate('facebook',{scope: ['email', 'first_name', 'last_name', 'displayName', 'middle_name', 'gender', 'link', 'email']}));
 
 
 app.get('/auth/facebook/callback',
