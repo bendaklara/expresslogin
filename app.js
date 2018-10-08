@@ -41,8 +41,8 @@ passport.use(new FacebookStrategy({
     clientSecret:config.facebook_api_secret ,
     callbackURL: config.callback_url,
 	scope: connector.config.keys.scope,	
-	profileFields: ['id', 'displayName', 'email', 'first_name', 'last_name', 'middle_name', 'gender', 'link']
-	},
+	profileFields: ['id', 'displayName', 'email', 'first_name', 'last_name', 'middle_name', 'gender','link']
+  },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
       //Check whether the User exists or not using profile.id
@@ -87,13 +87,7 @@ app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook',{scope: profile_fields: ['id',
-																					'email',
-																					'first_name',
-																					'last_name',
-																					'middle_name',
-																					'gender',
-																					'link']}));
+app.get('/auth/facebook', passport.authenticate('facebook',{scope: profile_fields: ['id', 'email', 'first_name', 'last_name', 'middle_name', 'gender', 'link']}));
 
 
 app.get('/auth/facebook/callback',
