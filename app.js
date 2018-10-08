@@ -70,6 +70,13 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'keyboard cat', key: 'sid'}));
+app.use(session({
+    secret: 'keyboard cat',
+	key: 'sid',
+    resave: true,
+    saveUninitialized: true
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
