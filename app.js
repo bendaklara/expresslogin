@@ -52,7 +52,7 @@ passport.use(new FacebookStrategy({
           {
             console.log("There is no such user, adding now");
 			console.log("Profile id: " + profile.id + "   Profile username" + profile.username);
-            connection.query("INSERT into user_info(user_id,user_name) VALUES('"+ profile.id + "','')");
+            connection.query("INSERT into user_info(user_id) VALUES('" + String(profile.id) + "')");
           }
           else
             {
