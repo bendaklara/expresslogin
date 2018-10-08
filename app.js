@@ -41,7 +41,7 @@ passport.use(new FacebookStrategy({
     clientSecret:config.facebook_api_secret ,
     callbackURL: config.callback_url,
 	graphApiVersion: 'v3.1',
-	profileFields: ['id', 'displayName', 'email']
+	profileFields: ['id', 'displayName', 'username', 'email', 'first_name']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -55,7 +55,11 @@ passport.use(new FacebookStrategy({
             console.log("There is no such user, adding now");
 			console.log("Profile id: " + profile.id );
 			console.log("Profile email: " + profile.email );
-			console.log("Profile displayName: " + profile.displayName );
+			console.log("displayName: " + profile.displayName );
+			console.log("userame: " + profile.username );
+			console.log("First name: " + profile.first_name );
+			console.log("Gender: " + profile.gender );
+			
 			
             connection.query("INSERT into user_info(user_id) VALUES('" + String(profile.id) + "')");
           }
@@ -88,7 +92,7 @@ app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook',{scope:['email', 'public_profile']}));
+app.get('/auth/facebook', passport.authenticate('facebook',{scope:['email', 'public_profile', 'first_name', 'gender']}));
 
 
 app.get('/auth/facebook/callback',
