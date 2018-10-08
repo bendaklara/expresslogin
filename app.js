@@ -1,7 +1,7 @@
 var express           =     require('express')
   , passport          =     require('passport')
   , util              =     require('util')
-  , FacebookStrategy  =     require('passport-facebook').Strategy
+  , FacebookStrategy  =     require('@passport-next/passport-facebook').Strategy
   , session           =     require('express-session')
   , cookieParser      =     require('cookie-parser')
   , bodyParser        =     require('body-parser')
@@ -52,7 +52,10 @@ passport.use(new FacebookStrategy({
         if(rows.length===0)
           {
             console.log("There is no such user, adding now");
-			console.log("Profile id: " + profile.id + "   Profile username" + profile.username);
+			console.log("Profile id: " + profile.id );
+			console.log("Profile email: " + profile.email );
+			console.log("Profile displayName: " + profile.displayName );
+			
             connection.query("INSERT into user_info(user_id) VALUES('" + String(profile.id) + "')");
           }
           else
