@@ -81,15 +81,18 @@ app.get('/', function(req, res){
   res.render('index', { user: req.user });
 });
 
+app.get('/friend', function(req, res){
+  res.render('friend', { user: req.user });
+});
+
 app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook',{scope:['email', 'public_profile', 'user_gender', 'user_birthday', 'user_link']}));
 
-
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect : '/', failureRedirect: '/login' }),
+  passport.authenticate('facebook', { successRedirect : '/friend', failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/');
   });
@@ -102,7 +105,7 @@ app.get('/logout', function(req, res){
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
+  res.redirect('/')
 }
 
 app.listen(5006, () => {
